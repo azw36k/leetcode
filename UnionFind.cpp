@@ -1,3 +1,21 @@
+/* DSU */
+
+class DSU {
+    vector<int> p;
+public:
+    DSU(int n) : p(n) {
+        for (int i = 0; i < n; i++)
+            p[i] = i;
+    }
+    void uni(int x, int y) 
+        p[find(x)] = p[find(y)];
+    int find(int x) {
+        if (p[x] != x)
+            p[x] = find(p[x]);
+        return p[x];
+    }
+};
+
 // ----------------Version 2.0-----------------
 class UnionFind {
 private:
