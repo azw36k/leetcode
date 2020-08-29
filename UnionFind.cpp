@@ -26,7 +26,7 @@ public:
     int find(int x) {
         return p[x] == x ? x : p[x] = find(p[x]); 
     }
-    bool unio(int u, int v) {
+    bool uni(int u, int v) {
         int pu = find(u);
         int pv = find(v);
         if (pu == pv) return false;
