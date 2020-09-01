@@ -10,8 +10,41 @@ public:
         for (int i = 0; i < n; i++)
             p[i] = i;
     }
-    void uni(int x, int y) 
+    void uni(int x, int y) {
         p[find(x)] = p[find(y)];
+    }
+    int find(int x) {
+        if (p[x] != x)
+            p[x] = find(p[x]);
+        return p[x];
+    }
+};
+
+// ----------------Version 3.0-----------------
+
+class DSU {
+    vector<int> p, size;
+public:
+    int root;
+    DSU(int n) : p(n), size(n, 1) {
+        for (int i = 0; i < n; i++)
+            p[i] = i;
+    }
+    int uni(int x, int y) {
+        x = find(x), y = find(y);
+        if (x == y) return 0;
+        int ret = 0;
+        if (x == find(root)) ret += size[y] - 1;
+        else if (y == find(root)) ret += size[x];
+        if (size[x] >= size[y]) {
+            size[x] += size[y];
+            p[y] = x;
+        } else {
+            size[y] += size[x];
+            p[x] = y;
+        }
+        return ret;
+    }
     int find(int x) {
         if (p[x] != x)
             p[x] = find(p[x]);
