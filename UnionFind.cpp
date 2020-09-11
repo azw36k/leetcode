@@ -1,3 +1,28 @@
+class DSU {
+    vector<int> v;
+    int size;
+public:
+    DSU(int n) {
+        v.resize(n);
+        size = n;
+        iota(v.begin(), v.end(), 0);
+    }
+    int find(int i) {
+        return v[i] == i ? i : v[i] = find(v[i]); // update the table!
+    }
+    void join(int i, int j) {
+        int pi = find(i), pj = find(j);
+        if (pi != pj) {
+            v[pi] = pj;
+            size--;
+        }
+    } 
+    int get_size() {
+        return size;
+    }
+};
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
